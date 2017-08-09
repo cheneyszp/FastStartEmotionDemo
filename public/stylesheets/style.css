@@ -1,0 +1,151 @@
+
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+  font: 14px  Helvetica, Arial, sans-serif;
+  background: #653397;
+}
+a {
+  color: #00B7FF;
+}
+ul {
+	list-style: none;
+}
+
+.container {
+	max-width:900px;
+	margin: 0 auto;
+}
+.how { letter-spacing: 2px;  font-family: 'Arial';  color:white; font-size:28px; font-weight:bold; }
+.how2 { letter-spacing: 1.5px;  font-family: 'Arial';  color:white; font-size:13px; } 
+.how2 a { text-decoration: none; color:cyan; }
+.header {
+	width:100%;
+	margin: 10px auto;
+	text-align: center;
+	/*clear: both;*/
+}
+.clearfix:after {
+	clear: both;
+}
+.header-img {
+	cursor: pointer;
+	margin: 5px auto;
+	width:auto;
+	max-height:200px;
+}
+.header-text {
+	font-size: 20px;
+	color: #eee;
+	text-align: left;
+	/*vertical-align: center;*/
+	margin-top: 60px;
+}
+.main-body {
+	margin: 10px auto;
+	text-align: center;
+	clear: both;
+}
+.photos-wrap {
+	margin: 0 auto;
+	overflow: hidden;
+}
+.photos {
+	margin: 0 auto;
+	overflow: hidden;
+}
+.photo-li {
+	width: 300px;
+	height: 200px;
+	float: left;
+	background-position: center center;
+	background-size: cover;
+	cursor: pointer;
+	/*background-repeat: no-repeat;*/
+}
+@media (max-width: 600px) {
+	.photo-li { width: 100%; }
+}
+.photo-li:hover {
+	opacity: 0.9;
+}
+.photo-li .inner {
+	margin-top: 70px;
+	padding: 5px;
+	background-color: #653397;
+	font-size: 30px;
+	color: #fff;
+	opacity: 1;
+	display: none;
+}
+
+.photo-wrap {
+	margin: 0 auto;
+	text-align: center;
+	display: none;
+}
+.photo-wrap .inner {
+	margin: 10px auto;	
+}
+.photo {
+	max-width: 100%;
+	max-height: 600px;
+	border: 10px #fff solid;
+	border-bottom: 40px #fff solid;
+	box-shadow: 10px 10px 20px rgba(0,0,0,.4);
+}
+canvas {
+	max-width: 95%;
+	border: 10px #fff solid;
+	border-bottom: 40px #fff solid;
+	box-shadow: 10px 10px 20px rgba(0,0,0,.4);
+}
+.upload-wrap {
+	max-width: 960px;
+	margin: 15px auto;
+	text-align: center;
+}
+.upload-wrap ul {
+	margin: 0 auto;
+	display: inline-block;
+}
+.upload-wrap li {
+	text-align: center;
+	margin:10px; 
+	display: inline-block;
+}
+.upload-button {
+	min-width: 180px;
+	background: white;
+	color: #653397;
+	cursor: pointer;
+	font-family: 'Dancing Script';
+	font-size: 24px;
+	padding: 10px;
+	border:none;
+}
+.upload-button:hover {
+	background:#653397;
+	color: #fff;
+	border-color: white;
+	border:solid;
+	border-width: 1px;
+}
+.hide-file {
+	display: none;
+	visibility: hidden;
+}
+.hint {
+	font-size: 32px;
+	color: #fff;
+	clear: both;
+	margin: 10px;
+}
+.emoji { max-height: 30px; width:auto; margin-left:5px; margin-right:5px; }
+#back { margin-left:5px; display:none; cursor:pointer; position:relative; margin-top:0px; padding:5px 10px; width:30px; border:solid; border-color:white; border-width:1px; color: #fff; }
+
+.mySlides {display:none}
+.w3-left, .w3-right, .w3-badge {cursor:pointer}
+.w3-badge {height:13px;width:13px;padding:0}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<title>看看你的情绪</title>
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+	<link href='/images/favicon.ico' type="image/x-icon" rel='icon' />
+	<link href='/images/favicon.ico' type="image/x-icon" rel='shortcut icon' />
+	<script type="text/javascript" src="/javascripts/jquery.min.js"></script>
+	<script type="text/javascript" src="/javascripts/exif.js"></script>
+	<!--<script type="text/javascript" src="/javascripts/tracking-min.js"></script>
+    <script type="text/javascript" src="/javascripts/face-min.js"></script>-->
+	<script type="text/javascript" src="/javascripts/main.js"></script>
+
+</head>
+
+<body>
+	<div class="container" id="container">
+
+		<div class="header clearfix" id="header">
+			<img onclick="vm()" src="/assets/headerimg.png" class="header-img" />
+			<div class="how">我哭我笑，我高兴我难过，你都会在我身边，对吧</div>
+		</div>
+		<div class="main-body" id="main-body">
+			<div class="photos-wrap" id="photos-wrap">
+				<div class="w3-content w3-display-container" align="center" style="max-width:400px">
+					<img class="mySlides" src="/assets/1.jpg" onclick="ff(this)">
+					<img class="mySlides" src="/assets/2.jpg" onclick="ff(this)">
+					<img class="mySlides" src="/assets/3.jpg" onclick="ff(this)">
+					<div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%" >
+						<div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
+						<div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
+						<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
+						<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
+						<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
+					</div>
+				</div>
+			</div>
+
+			<div class="photo-wrap" id="photo-wrap" style="display:none">
+				<i id="hint" class="hint"></i>
+				<div class="inner" id="photo-wraper">
+					<!--  -->
+				</div>
+				<i id="emotionword" class="hint"></i>
+			</div>
+			<div>
+
+				<div class="upload-wrap" id="upload">
+					<ul>
+						<li>
+							<button class="upload-button" id="upload" onclick="document.getElementById('file').click()">
+								<!-- <i class="icon icon-upload"></i> -->
+								上传一张新的图片
+							</button>
+						</li>
+						<li>
+							<button class="upload-button" id="useother" onclick="vm()" style="display:none">
+								<!-- <i class="icon icon-useother"></i> -->
+								返回主页
+							</button>
+						</li>
+						
+					</ul>
+					<input class="hide-file" id="file" type="file" name="pic" />
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+</body>
+
+</html>
