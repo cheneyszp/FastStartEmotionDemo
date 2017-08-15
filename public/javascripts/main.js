@@ -1,6 +1,6 @@
 var slideIndex = 1;
-var YOUR_FACE_API_KEY = "";
-var YOUR_EMOTION_API_KEY = "";
+var YOUR_FACE_API_KEY = "*******************";
+var YOUR_EMOTION_API_KEY = "*******************";
 
 window.onload = function () {
 
@@ -116,7 +116,7 @@ function markFace(img) {
 
 function postImgToFace(photo, img) {
 	$.ajax({
-		url: "https://api.cognitive.azure.cn/face/v1.0/detect?returnFaceId=false&returnFaceLandmarks=false&returnFaceAttributes=age,gender,emotion",
+		url: "https://api.cognitive.azure.cn/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=false&returnFaceAttributes=age,gender,emotion",
 		beforeSend: function (xhrObj) {
 			// Request headers
 			xhrObj.setRequestHeader("Content-Type", "application/octet-stream");
@@ -163,9 +163,10 @@ function postImgtoCognitiveService(photo, img, faceresponse) {
 				var soucrew = this.width, soucreh = this.height;
 
 				var wratio = w / soucrew, hratio = h / soucreh;
-
+				
 				result = response;
 				var faceresult = faceresponse;
+				postDataToServer(getJsonObject(faceresult,result));
 				var photoWrap = document.getElementById('photo-wraper');
 				var canvas = document.createElement('canvas');
 				canvas.id = 'canvas';
@@ -240,8 +241,40 @@ function getBase64FromImageUrl(photo) {
 	img.src = photo.src;
 }
 
+//responseText	"<h1>Unexpected token o in JSON at position 1</h1>\n<h2>400</h2>\n<pre>SyntaxError: Unexpected token o in JSON at position 1\n    at Object.parse (native)\n    at parse (c:\\Projects\\EmotionWeb\\node_modules\\body-parser\\lib\\types\\json.js:84:17)\n    at c:\\Projects\\EmotionWeb\\node_modules\\body-parser\\lib\\read.js:102:18\n    at IncomingMessage.onEnd (c:\\Projects\\EmotionWeb\\node_modules\\body-parser\\node_modules\\raw-body\\index.js:149:7)\n    at IncomingMessage.g (events.js:292:16)\n    at emitNone (events.js:86:13)\n    at IncomingMessage.emit (events.js:185:7)\n    at endReadableNT (_stream_readable.js:974:12)\n    at _combinedTickCallback (internal/process/next_tick.js:80:11)\n    at process._tickCallback (internal/process/next_tick.js:104:9)</pre>\n"
+function postDataToServer(result) {
+	$.ajax({
+		url: "http://ocpemotion.chinacloudsites.cn/api/addemotiondata",
+		beforeSend: function (xhrObj) {
+			// Request headers
+			xhrObj.setRequestHeader("Content-Type", "application/json");
+		},
+		type: "POST",
+		// Request body
+		processData: false,
+		data: result
+	})
+		.done(function (response) {
+		})
+		.fail(function (error) {
+			//alert("error"+error.responseText);
+		});
+}
 
-
+function getJsonObject(faceresult,emotionresult)
+{
+	var finalResult = "[";
+	for (i = 0; i<faceresult.length;i++)
+	{
+		if (i!=0) finalResult+= ",";
+		var faceid = faceresult[i].faceId;
+		var emotionText = getMaxEmotion(emotionresult[i].scores);
+		var gender = faceresult[i].faceAttributes.gender=="male"?"男":"女";
+		var age = Math.round(faceresult[i].faceAttributes.age);
+		finalResult +='{"faceid":"'+faceid+'","gender":"'+gender+'","age":"'+age+'","emotion":"'+emotionText+'"}';
+	}
+	return finalResult+"]";
+}
 
 function faceDeal(ctx, data, wratio, hratio, facedata, emotionwordflag) {
 
@@ -258,6 +291,8 @@ function faceDeal(ctx, data, wratio, hratio, facedata, emotionwordflag) {
 
 	if (emotionwordflag) {
 		document.getElementById('emotionword').innerHTML = getEmotionText(emotionText);
+		if (emotionText === "高兴") 
+			document.getElementById('emotionword').innerHTML = "你的笑脸值高达"+Math.round(emotion.happiness*100) +"分，快去和小伙伴们分享一下你的喜悦吧！";
 	}
 
 	ctx.fillStyle = 'orange';
@@ -296,7 +331,7 @@ function getEmotionText(emotion) {
 	else if (emotion === "厌恶") return "如此美丽（帅）的你，真是让我厌恶的不要不要的！！";
 	else if (emotion === "恐惧") return "明镜止水、宁静致远。来，跟我一起深呼吸1、2、3……";
 	else if (emotion === "高兴") return "你笑得那么美，你妈妈知道吗。";
-	else if (emotion === "自然") return "是什么让你如此生无可恋？";
+	else if (emotion === "自然") return getNatualEmotionWord();
 	else if (emotion === "悲伤") return "悲伤逆流，转过身，后背给你靠。";
 	else return "是瞬间迸发的热情让我们相遇，这样的惊讶是美丽的，然而变化无常更为美丽。";
 	// 1.	愤怒：如此霸道，一起拯救世界吧！
@@ -308,6 +343,31 @@ function getEmotionText(emotion) {
 	// 7.	悲伤：悲伤逆流，转过身，后背给你靠。
 	// 8.	惊讶：是瞬间迸发的热情让我们相遇，这样的惊讶是美丽的，然而变化无常更为美丽。
 
+	// 1.	你在想什么？深邃的眼神，让我不禁沉迷其中……
+	// 2.	发呆啊发呆，不在发呆中睡着，就在发呆中成为僵尸……
+	// 3.	呆若木鸡，说的就是你！O(∩_∩)O哈哈~
+	// 4.	是不是我华丽的外表迷惑了你的眼？
+	// 5.	我知道你一定是内心如火，只是为了低调隐藏了自己
+	// 6.	你在想念谁？你的眼神出卖了你。
+	// 7.	我们都是木偶人，一不许说话二不许动……
+	// 8.	想笑别憋着！不然，我怎么知道你想笑？
+	
+}
+
+function getNatualEmotionWord()
+{
+	var result = ['你在想什么？深邃的眼神，让我不禁沉迷其中……',
+				  '发呆啊发呆，不在发呆中睡着，就在发呆中成为僵尸……',
+				  '呆若木鸡，说的就是你！O(∩_∩)O哈哈~',
+				  '是不是我华丽的外表迷惑了你的眼？',
+				  '我知道你一定是内心如火，只是为了低调隐藏了自己',
+				  '你在想念谁？你的眼神出卖了你。',
+				  '我们都是木偶人，一不许说话二不许动……',
+				  '想笑别憋着！不然，我怎么知道你想笑？'
+				];
+	var index = Math.floor(Math.random() * 7);
+	var responsedata = result[index];
+	return responsedata;
 }
 
 // @param {string} img 图片的base64
