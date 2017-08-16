@@ -107,37 +107,38 @@ Cognitive Service Face API+ Emotion API and Azure SQL Database and PowerBI
 
 ![创建数据库-5](/images/db5.PNG)
 
-7. 访问[SQL Server Management Studio](https://docs.microsoft.com/zh-cn/sql/ssms/download-sql-server-management-studio-ssms )下载安装SQL Server Management Studio。
+7. 打开数据库的概览页，点击“工具”
 
-8. 打开SQL Server Management Studio， 弹出连接数据配置页面， 输入5步中记录的数据库服务器域名， 在3步中配置的用户名和密码，点击连接。
+![创建数据库-6](/images/db6.jpg)
 
-![创建数据库-6](/images/db6.PNG)
+8. 可以使用查询编辑器来创建数据库，点击“查询编辑器”，并登录到数据库
 
-9. 进入数据库管理页面， 选择打开文件，打开本例中给出的建库脚本[emotiondb.sql](/emotiondb.sql)，点击执行，完成emotionlist表创建。
+![创建数据库-7](/images/db7.jpg)
 
-## 在程序中配置数据库参数
-将数据库配置参数填写到项目工程代码中，具体参数包括（以创建数据库时填写的为主）：
-- 数据库服务器名称：nr8ver0mqe.database.chinacloudapi.cn
-- 用户名： sqldb
-- 密码：xxxxxx
-- 数据库名： emotiondb
+9. 成功登录之后，将以下代码粘贴到编辑器中，点击执行，完成emotionlist表创建。
 
-将参数更新到工程代码中，样例如下
-```Javascript
-// Create connection to database
-var config = 
-   {
-     userName: 'sqldb', // update me
-     password: 'xxxxxxxx', // update me
-     server: 'nr8ver0mqe.database.chinacloudapi.cn', // update me
-     options: 
-        {
-           database: 'emotiondb' //update me
-           , encrypt: true
-        }
-   }
-var connection = new Connection(config);
+```SQL
+--Clean the DataBase
+IF EXISTS(SELECT * FROM sysobjects WHERE name='emotionlist')
+  DROP TABLE emotionlist
+
+--Create Table
+--Emotion Access List Table
+go
+CREATE TABLE emotionlist(
+	gender nvarchar(30) Not Null ,
+	age varchar(30) Not Null,
+	emotion	nvarchar(30) Not Null,
+	faceid varchar(100) Not Null,
+	time datetime Not Null,
+);
+CREATE CLUSTERED INDEX EmotionlistIndex ON emotionlist (time ASC); 
+go
+
 ```
+
+![创建数据库-8](/images/db8.jpg)
+
 
 ## 配置Node.js程序
 
