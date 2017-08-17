@@ -2,6 +2,7 @@
 Cognitive Service Face API+ Emotion API and Azure SQL Database and PowerBI 
 
 ## 环境准备
+- 注册Azure账号（[1元试用账号申请](https://www.azure.cn/pricing/1rmb-trial-full/)）
 - 安装Visual Studio Code（[下载](https://code.visualstudio.com/Download)）（用于调试代码）
 - 安装Git（[下载](https://git-scm.com/downloads)） （用于部署应用）
 
@@ -149,7 +150,7 @@ go
 ![node.js-1](/images/nodecode1.jpg)
 
 
-2. 使用Visual Studio Code打开/models/emotiondata.js
+2. 使用Visual Studio Code打开文件夹“FastStartEmotionDemo-master ”，,编辑/models/emotiondata.js
 
 ```Javascript
 // Create connection to database
@@ -167,7 +168,7 @@ var config =
 
 ```
 
-3. 使用Visual Studio Code打开/public/javascripts/main.js
+3. 使用Visual Studio Code打开文件夹“FastStartEmotionDemo-master ”，编辑其中的/public/javascripts/main.js，将划线部分内容分别替换为创建认知API的步骤5和步骤9的任意一个Key。
 
 ```Javascript
 var YOUR_FACE_API_KEY = "配置为你创建的认知服务人脸识别API的key";
@@ -205,7 +206,7 @@ git commit -m "Initial commit"
 3. 添加Azure的远程Git仓库地址
 
 ```
-git remote add azuregit 你的远程仓库链接地址（在AzureWebApp概览页中复制过来）
+git remote add azuregit 你的远程仓库链接地址（见创建Web应用的步骤8）
 ```
 
 ![Git上传部署到Web App-6](/images/git6.jpg)
@@ -226,6 +227,6 @@ git remote add azuregit 你的远程仓库链接地址（在AzureWebApp概览页
 
 ![Git上传部署到Web App-9](/images/git9.jpg)
 
-这样你的Node.js网站已经部署完毕，开始使用吧！
+这样你的Node.js网站已经部署完毕，您可以访问您创建的Web应用概览里显示的URL，开始使用您自己创建的情绪识别小应用了。
 
 ![Git上传部署到Web App-10](/images/website.jpg)
