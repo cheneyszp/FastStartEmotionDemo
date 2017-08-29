@@ -37,12 +37,21 @@ ul {
 	max-height:200px;
 }
 .header-text {
-	font-size: 20px;
+	font-size: 16px;
 	color: #eee;
 	text-align: left;
 	/*vertical-align: center;*/
 	margin-top: 60px;
 }
+
+.adimg {
+	height: 65px;
+	width: 50px;
+	float:right;
+	cursor: pointer;
+	margin-left: 15px;
+}
+
 .main-body {
 	margin: 10px auto;
 	text-align: center;
@@ -104,7 +113,7 @@ canvas {
 }
 .upload-wrap {
 	max-width: 960px;
-	margin: 15px auto;
+	margin: 5px auto;
 	text-align: center;
 }
 .upload-wrap ul {
@@ -138,7 +147,16 @@ canvas {
 	visibility: hidden;
 }
 .hint {
-	font-size: 32px;
+	font-size: 18px;
+	color: #fff;
+	clear: both;
+	margin: 10px;
+}
+
+.hint2 {
+	margin: 0px;
+	text-align: center;
+	font-size: 10px;
 	color: #fff;
 	clear: both;
 	margin: 10px;

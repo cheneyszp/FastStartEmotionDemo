@@ -4,7 +4,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="/stylesheets/w3.css">
 	<title>看看你的情绪</title>
 	<link rel='stylesheet' href='/stylesheets/style.css' />
 	<link href='/images/favicon.ico' type="image/x-icon" rel='icon' />
@@ -21,7 +21,7 @@
 	<div class="container" id="container">
 
 		<div class="header clearfix" id="header">
-			<img onclick="vm()" src="/assets/headerimg.png" class="header-img" />
+			<img onclick="vm()" src="/assets/headerimg.png" class="header-img" id = "title-img"/>
 			<div class="how">今天你开心吗？</div>
 		</div>
 		<div class="main-body" id="main-body">
@@ -30,12 +30,16 @@
 					<img class="mySlides" src="/assets/1.jpg" onclick="ff(this)">
 					<img class="mySlides" src="/assets/2.jpg" onclick="ff(this)">
 					<img class="mySlides" src="/assets/3.jpg" onclick="ff(this)">
+					<img class="mySlides" src="/assets/4.jpg" onclick="ff(this)">
+					<img class="mySlides" src="/assets/5.jpg" onclick="ff(this)">
 					<div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%" >
 						<div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
 						<div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
 						<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
 						<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
 						<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
+						<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(4)"></span>
+						<span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(5)"></span>
 					</div>
 				</div>
 			</div>
@@ -44,6 +48,7 @@
 				<i id="hint" class="hint"></i>
 				<div class="inner" id="photo-wraper">
 					<!--  -->
+					
 				</div>
 				<i id="emotionword" class="hint"></i>
 			</div>
@@ -56,6 +61,7 @@
 								<!-- <i class="icon icon-upload"></i> -->
 								上传一张笑脸吧😊
 							</button>
+							<a href="https://github.com/cheneyszp/FastStartEmotionDemo"><img  class = "adimg" src="/assets/giturl.png"></a>
 						</li>
 						<li>
 							<button class="upload-button" id="useother" onclick="vm()" style="display:none">
@@ -65,9 +71,13 @@
 						</li>
 						
 					</ul>
+					
 					<input class="hide-file" id="file" type="file" name="pic" />
 				</div>
 			</div>
+		</div>
+		<div class="header clearfix" id="header">
+		 	<i id="promotionword" class="hint2">使用微软认知服务，只需几行代码，即可生成具有强大算法的应用。</i>
 		</div>
 	</div>
 

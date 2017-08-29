@@ -201,6 +201,7 @@ function postImgtoCognitiveService(photo, img, faceresponse) {
 						faceDeal(ctx, result[j], wratio, hratio, faceresult[j], j === 0 ? true : false);
 					}
 					document.getElementById('photo-wraper').style.display = 'block';
+					document.getElementById('title-img').style.display = 'none';
 					// result.forEach(function (result) {
 					// 	faceDeal(ctx, result);
 					// });
@@ -292,7 +293,7 @@ function faceDeal(ctx, data, wratio, hratio, facedata, emotionwordflag) {
 	if (emotionwordflag) {
 		document.getElementById('emotionword').innerHTML = getEmotionText(emotionText);
 		if (emotionText === "高兴") 
-			document.getElementById('emotionword').innerHTML = "你的笑脸值高达"+Math.round(emotion.happiness*100) +"分，快去和小伙伴们分享一下你的喜悦吧！";
+			document.getElementById('emotionword').innerHTML = "你的笑脸值高达"+getEmotionScores(emotion) +"分，快去和小伙伴们分享一下你的喜悦吧！";
 	}
 
 	ctx.fillStyle = 'orange';
@@ -323,6 +324,19 @@ function getMaxEmotion(scores) {
 	if (scores.sadness > maxscore) { maxscore = scores.sadness; result = "悲伤"; }
 	if (scores.surprise > maxscore) { maxscore = scores.surprise; result = "惊讶"; }
 	return result;
+}
+
+function getEmotionScores(emotion)
+{
+	var score = Math.round(emotion.happiness*100);
+	var result = score + 6 - parseInt(emotion.contempt.toExponential().substring(0,1))
+	- parseInt(emotion.disgust.toExponential().substring(0,1))
+	- parseInt(emotion.fear.toExponential().substring(0,1))
+	- parseInt(emotion.neutral.toExponential().substring(0,1))
+	- parseInt(emotion.sadness.toExponential().substring(0,1))
+	- parseInt(emotion.surprise.toExponential().substring(0,1));
+	return result;
+
 }
 
 function getEmotionText(emotion) {
@@ -464,6 +478,8 @@ function vm() {
 	document.getElementById('photo-wraper').style.display = 'none';
 	document.getElementById('photos-wrap').style.display = 'block';
 	document.getElementById('useother').style.display = 'none';
+	document.getElementById('title-img').style.display = 'block';
+	
 	//document.getElementById('back').style.display = 'none';
 }
 function tipOn(photo) {
