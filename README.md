@@ -1,5 +1,5 @@
 # Azure Quick Start 1# Epcisode: Know-You
-此教程通过在Azure上创建虚拟机快速部署微软人脸识别、情绪识别小应用。
+此教程通过在Azure上创建虚拟机快速部署微软人脸识别、情绪识别小应用。如要使用Web App来部署应用，请参阅[Web App的部署教程](/GuideWithWebAppDeploymentAndSQL.md)
 
 ## 今天你开心吗？
 
