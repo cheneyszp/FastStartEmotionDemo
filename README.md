@@ -1,8 +1,6 @@
 # Azure Quick Start 1# Epcisode: Know-You
 此教程通过在Azure上创建虚拟机快速部署微软人脸识别、情绪识别小应用。如要使用Web App来部署应用，请参阅[Web App的部署教程](/GuideWithWebAppDeploymentAndSQL.md)
 
-## 今天你开心吗？
-
 ## 认识Azure
 微软在全球42个区域，打造了上百个数据中心，为客户提供Azure服务。Azure是一个不断增长的集成云服务集合，助您加快发展步伐，提高工作效率，节省运营成本。
 
@@ -114,6 +112,8 @@ user01@vm-myvm01:~$ git init
 user01@vm-myvm01:~$ git clone https://github.com/cheneyszp/FastStartEmotionDemo.git
 
 user01@vm-myvm01:~$ vi /home/user01/FastStartEmotionDemo/public/javascripts/main.js
+
+--用上面记录的keys，分别给YOUR_FACE_API_KEY、YOUR_EMOTION_API_KEY赋值，然后保存。
 
 user01@vm-myvm01:~$ cd /home/user01/FastStartEmotionDemo/
 user01@vm-myvm01:~/FastStartEmotionDemo$ nohup sudo npm start &
