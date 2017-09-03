@@ -1,5 +1,5 @@
 # Azure Quick Start 1# Epcisode: Know-You
-Cognitive Service Face API+ Emotion API and Azure SQL Database and PowerBI 
+此教程通过在Azure上创建Azure Web App快速部署微软人脸识别、情绪识别小应用。
 
 ## 环境准备
 - 注册Azure账号（[1元试用账号申请](https://www.azure.cn/pricing/1rmb-trial-full/)）

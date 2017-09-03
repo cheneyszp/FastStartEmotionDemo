@@ -18,6 +18,7 @@ Cognitive Service Face API+ Emotion API with VM deployment.
 
 ## 今天你开心吗
 基于微软智能云Azure亲手搭建和体验人脸情绪识别示例。
+
 ![程序效果-1](/images/emotion1.jpg)
 
 如何获得Azure测试账号？
@@ -64,7 +65,7 @@ https://www.azure.cn/pricing/1rmb-trial-full/
 
 ## 创建VM（Ubuntu Server 16.04LTS）
 
-本教程使用Azure的Ubuntu虚拟机来承载网站内容，网站内容使用Node.js来编写。如试用Azure Web App来承载网站内容，可以参考另外的教程。
+本教程使用Azure的Ubuntu虚拟机来承载网站内容，网站内容使用Node.js来编写。如试用Azure Web App来承载网站内容，可以参考[Web App的部署教程](/GuideWithWebAppDeploymentAndSQL.md)。
 
 1. 使用Azure账号登陆[Azure门户](http://portal.azure.cn)
 2. 登陆后， 选择新建->虚拟机，选择Ubuntu Server 16.04 LTS
