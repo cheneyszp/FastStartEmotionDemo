@@ -1,10 +1,34 @@
 # Azure Quick Start 1# Epcisode: Know-You
-Cognitive Service Face API+ Emotion API and Azure SQL Database and PowerBI 
+Cognitive Service Face API+ Emotion API with VM deployment. 
 
-## 环境准备
+## 认识Azure
+微软在全球42个区域，打造了上百个数据中心，为客户提供Azure服务。Azure是一个不断增长的集成云服务集合，助您加快发展步伐，提高工作效率，节省运营成本。
+
+[https://www.azure.cn/home/features/what-is-azure/](https://www.azure.cn/home/features/what-is-azure/)
+
+- Microsoft Azure 官网：  https://www.azure.com
+- Microsoft Azure 管理门户： https://portal.azure.com
+
+- 由世纪互联运营的Microsoft Azure官网：https://www.azure.cn/
+- 由世纪互联运营的Microsoft Azure管理门户：https://portal.azure.cn
+
+- Azure School: https://school.azure.cn/
+
+微软智能云Azure为用户提供了业界领先的人工智能（AI）服务，基于Azure服务可以亲手快速搭建一个懂你的AI应用，希望这个小应用让你今天开心！
+
+## 今天你开心吗
+基于微软智能云Azure亲手搭建和体验人脸情绪识别示例。
+![程序效果-1](/images/emotion1.jpg)
+
+如何获得Azure测试账号？
+
+https://www.azure.cn/pricing/1rmb-trial-full/
+
+## 部署步骤
 - 注册Azure账号（[1元试用账号申请](https://www.azure.cn/pricing/1rmb-trial-full/)）
-- 安装Visual Studio Code（[下载](https://code.visualstudio.com/Download)）（用于调试代码）
-- 安装Git（[下载](https://git-scm.com/downloads)） （用于部署应用）
+- 创建认知服务API 
+- 创建VM（Ubuntu Server 16.04LTS）
+- 部署应用（Node.js + Git）
 
 ## 创建认知服务API
 
@@ -38,195 +62,69 @@ Cognitive Service Face API+ Emotion API and Azure SQL Database and PowerBI
 
 ![创建认知服务-6](/images/cog6.jpg)
 
-## 创建Web应用
+## 创建VM（Ubuntu Server 16.04LTS）
 
-本例使用Azure Web App来承载网站内容，网站内容使用Node.js来编写。
-1. 使用Azure账号登陆[Azure门户](http://portal.azure.cn)
-2. 登陆后， 选择新建->Web+Mobile-> Web应用
-
-![创建Web应用-1](/images/webapp1.jpg)
-
-3. 设置相应的应用名称、资源组以及应用计划，点击创建。
-4. Web应用创建成功后，可以在资源列表中看到刚刚创建的"ocpemtion"，点击进入Web App概述页，其中URL为你的Web应用的地址。
-
-![创建Web应用-2](/images/webapp2.jpg)
-
-5. 点击部署凭据，设置用户名和密码。这个作为FTP或者GIT的部署凭据，请牢记用户名密码 😊
-
-
-![创建Web应用-3](/images/webapp3.jpg)
-
-6. 点击部署选项，选择部署源。Web应用可以通过多种方式部署，比较流行的做法是通过Git来部署，本示例将演示通过Git来部署你的Node.js应用。设置部署源为“本地Git存储库”。
-
-![创建Web应用-4](/images/webapp4.jpg)
-
-7. 点击确定即可。
-
-![创建Web应用-5](/images/webapp5.jpg)
-
-
-8. 回到应用服务的概述中，可以看到Git克隆url
-
-![创建Web应用-6](/images/webapp6.jpg)
-
-
-
-## 创建数据库
-
-本例中使用SQL DB保存访问过该网站的用户记录， 主要包括照片识别的结果信息：性别，年龄，表情。本节描述完整的数据库部署过程。
-
-注：本例不保存任何用户照片，阅后即焚。
+本教程使用Azure的Ubuntu虚拟机来承载网站内容，网站内容使用Node.js来编写。如试用Azure Web App来承载网站内容，可以参考另外的教程。
 
 1. 使用Azure账号登陆[Azure门户](http://portal.azure.cn)
-2. 登陆后， 选择新建->DataBase->SQL数据库
+2. 登陆后， 选择新建->虚拟机，选择Ubuntu Server 16.04 LTS
 
-![创建数据库-1](/images/db1.PNG)
+![创建虚拟机-1](/images/vm1.jpg)
 
-3. 输入数据库配置信息包括：
+3. 指定虚拟机名称等，用户名： user01 密码: MSLoveLinux!
 
-    - 数据库名： emotiondb
-    - 资源组：选择在创建web site时已经创建的test资源组
-    - 服务器名称：创建一个新的服务器，输入服务器名称emotion
-    - 数据库管理员：sqldb
-    - 密码：xxxxxxx
-    - 确认密码：xxxxxxx
-    - 位置：中国北部
+![创建虚拟机-2](/images/vm2.jpg)
+![创建虚拟机-3](/images/vm3.jpg)
 
-输入完成后，选择确认，创建。
+4. 配置可选功能，使用默认选项
 
-![创建数据库-2](/images/db2.PNG)
+![创建虚拟机-4](/images/vm4.jpg)
+![创建虚拟机-5](/images/vm5.jpg)
 
-4. 数据库和服务器创建成功后，可以在资源列表中看到，点击“emotiondb”，进入数据库详情页：
+5. 创建完毕后，记录虚拟机公共IP地址。
 
-![创建数据库-3](/images/db3.PNG)
+![创建虚拟机-6](/images/vm6.jpg)
 
-5. 点击数据库服务器（在服务器名称下），记录数据库服务器名称，这里是“nr8ver0mqe.database.chinacloudapi.cn”，后面在建立数据库连接时使用。
+6. 调整虚拟机网络安全组，添加入站访问安全规则，打开80端口
 
-![创建数据库-4](/images/db4.PNG)
+![创建虚拟机-7](/images/vm7.jpg)
+![创建虚拟机-8](/images/vm8.jpg)
+![创建虚拟机-9](/images/vm9.jpg)
 
-6. 配置数据库客户端访问授权，进入数据服务器详情页后，选择设置->防火墙，将当前客户端（即安装了SQL Server Management Studio的客户端）IP加入授权访问列表，并确保允许访问Azure服务选项打开。
+## 部署应用
 
-![创建数据库-5](/images/db5.PNG)
+ssh 远程连接到虚拟机
 
-7. 打开数据库的概览页，点击“工具”
+1. 使用putty， 下载[putty](http://www.putty.org/)
 
-![创建数据库-6](/images/db6.jpg)
+2. 或者Linux ssh命令行等其它工具
 
-8. 可以使用查询编辑器来创建数据库，点击“查询编辑器”，并登录到数据库
+![部署应用-1](/images/deploy1.jpg)
+![部署应用-2](/images/deploy2.jpg)
 
-![创建数据库-7](/images/db7.jpg)
+运行如下脚本安装部署应用：
+```
+user01@vm-myvm01:~$ sudo apt-get update
+user01@vm-myvm01:~$ sudo apt-get install nodejs
+user01@vm-myvm01:~$ sudo apt-get install npm
+user01@vm-myvm01:~$ git init
+user01@vm-myvm01:~$ git clone https://github.com/cheneyszp/FastStartEmotionDemo.git
 
-9. 成功登录之后，将以下代码粘贴到编辑器中，点击执行，完成emotionlist表创建。
+user01@vm-myvm01:~$ vi /home/user01/FastStartEmotionDemo/public/javascripts/main.js
 
-```SQL
---Clean the DataBase
-IF EXISTS(SELECT * FROM sysobjects WHERE name='emotionlist')
-  DROP TABLE emotionlist
-
---Create Table
---Emotion Access List Table
-go
-CREATE TABLE emotionlist(
-	gender nvarchar(30) Not Null ,
-	age varchar(30) Not Null,
-	emotion	nvarchar(30) Not Null,
-	faceid varchar(100) Not Null,
-	time datetime Not Null,
-);
-CREATE CLUSTERED INDEX EmotionlistIndex ON emotionlist (time ASC); 
-go
+user01@vm-myvm01:~$ cd /home/user01/FastStartEmotionDemo/
+user01@vm-myvm01:~/FastStartEmotionDemo$ nohup sudo npm start &
 
 ```
 
-![创建数据库-8](/images/db8.jpg)
+部署完毕，请用手机浏览器访问 http://YOURIP，请一定要转发到微信群中分享哦！
+
+今天你开心吗？
 
 
-## 配置Node.js程序
-
-本例使用Node.js作为后端程序，使用EJS作为模板语言。
-
-1. 请从从本仓库clone或者直接下载到本地。
-
-![node.js-1](/images/nodecode1.jpg)
-
-
-2. 使用Visual Studio Code打开文件夹“FastStartEmotionDemo-master ”，,编辑/models/emotiondata.js
-
-```Javascript
-// Create connection to database
-var config = 
-   {
-     userName: '配置为你的数据库用户名', // update me
-     password: '配置为你的数据库用密码', // update me
-     server: '你的数据库服务器.database.chinacloudapi.cn', // update me
-     options: 
-        {
-           database: '你创建的数据库名字' //update me
-           , encrypt: true
-        }
-   }
-
-```
-
-3. 使用Visual Studio Code打开文件夹“FastStartEmotionDemo-master ”，编辑其中的/public/javascripts/main.js，将划线部分内容分别替换为创建认知API的步骤5和步骤9的任意一个Key。
-
-```Javascript
-var YOUR_FACE_API_KEY = "配置为你创建的认知服务人脸识别API的key";
-var YOUR_EMOTION_API_KEY = "配置为你创建的认知服务情绪识别API的key";
-```
-
-## 部署Node.js程序
-
-1. 下载下来的代码解压出来。
-
-![Git上传部署到Web App-1](/images/git1.jpg)
-
-2.在解压出来的根目录中创建本地的仓库。首先打开Windows Powershell或者打开cmd,然后cd到当前目录即可。
-
-![Git上传部署到Web App-2](/images/git2.jpg)
-
-输入创建本地仓库的命令：
-
-```
-git init
-```
-
-![Git上传部署到Web App-3](/images/git3.jpg)
-
-2. 提交内容到本地仓库中
-
-```
-git add -A
-git commit -m "Initial commit"
-```
-![Git上传部署到Web App-4](/images/git4.jpg)
-
-![Git上传部署到Web App-5](/images/git5.jpg)
-
-3. 添加Azure的远程Git仓库地址
-
-```
-git remote add azuregit 你的远程仓库链接地址（见创建Web应用的步骤8）
-```
-
-![Git上传部署到Web App-6](/images/git6.jpg)
-
-4. 将本地仓库推送到远程仓库部署
-
-```
- git push azuregit master
-```
-推送之后，第一次需要你输入当时在Azure Web App里面填写的部署凭据。妥善保存的用户名密码在这里用上了。
-![Git上传部署到Web App-7](/images/git7.jpg)
-
-填写之后就开始推送到远端部署了。
-
-![Git上传部署到Web App-8](/images/git8.jpg)
-
-大功告成！
-
-![Git上传部署到Web App-9](/images/git9.jpg)
-
-这样你的Node.js网站已经部署完毕，您可以访问您创建的Web应用概览里显示的URL，开始使用您自己创建的情绪识别小应用了。
-
-![Git上传部署到Web App-10](/images/website.jpg)
+## 参考文档
+1.	Azure解决方案：https://azure.microsoft.com/zh-cn/solutions/
+2.	Azure用户手册：https://docs.azure.cn/zh-cn/articles/azure-Iaas-user-manual-part1
+3.	Azure开发人员指南：https://azure.microsoft.com/zh-cn/campaigns/developer-guide/
+4.	Azure常用操作指南 - 技术支持常见问题与解答：https://docs.azure.cn/zh-cn/articles/
+5.	Azure常见问题：https://www.azure.cn/support/faq/
