@@ -1,5 +1,7 @@
 # Azure Quick Start 1# Epcisode: Know-You
-Cognitive Service Face API+ Emotion API with VM deployment. 
+此教程通过在Azure上创建虚拟机快速部署微软人脸识别、情绪识别小应用。
+
+## 今天你开心吗？
 
 ## 认识Azure
 微软在全球42个区域，打造了上百个数据中心，为客户提供Azure服务。Azure是一个不断增长的集成云服务集合，助您加快发展步伐，提高工作效率，节省运营成本。
